@@ -11,6 +11,7 @@ const todayTimetable = [
   { period: 6, time: '1:30 – 2:15', class: 'Class 8-A', subject: 'Mathematics', current: false },
 ];
 
+
 const recentSubmissions = [
   { student: 'Aarav Patel', assignment: 'Exercise 5.3', date: 'Today', status: 'Pending' },
   { student: 'Priya Singh', assignment: 'Exercise 5.3', date: 'Today', status: 'Graded' },
