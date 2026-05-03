@@ -190,6 +190,12 @@ AVS School Project/
 - Updated `router.tsx` to wire both modules (replacing ComingSoon placeholders).
 - All new code uses CSS variables from `tokens.css` — zero hardcoded hex, zero Tailwind.
 
+### 2026-05-03 — Production Build Hardening & Typings Fix
+- Resolved `tsc -b` compilation errors that were blocking the `npm run build` process.
+- Removed unused `lucide-react` imports across all dashboards (`ParentDashboard`, `PrincipalDashboard`, `StudentDashboard`, `SchoolsDirectory`, `TeacherDashboard`).
+- Fixed Recharts `Tooltip` formatter typings in `SuperAdminDashboard.tsx` to handle parameter type mismatches (TS2322) and avoid strict validation failures.
+- Ensured the prototype builds successfully (`Exit code: 0`) and is production-safe.
+
 ---
 
 ## 9. How a fresh AI chat should use this file
