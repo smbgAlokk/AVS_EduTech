@@ -1,0 +1,35 @@
+.mini-stat { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-xl); padding: var(--space-5); text-align: center; transition: all var(--transition-base); }
+.mini-stat:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+[data-theme="dark"] .mini-stat { background: rgba(31, 41, 55, 0.5); border-color: rgba(75, 85, 99, 0.3); }
+.mini-stat-icon { width: 44px; height: 44px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-3); }
+.mini-stat--green .mini-stat-icon { background: var(--primary-50); color: var(--primary-600); }
+.mini-stat--gold .mini-stat-icon  { background: #FFFBEB; color: #D97706; }
+.mini-stat--pink .mini-stat-icon  { background: var(--accent-50); color: var(--accent-600); }
+.mini-stat--blue .mini-stat-icon  { background: #EFF6FF; color: #2563EB; }
+[data-theme="dark"] .mini-stat--green .mini-stat-icon { background: rgba(16,185,129,0.12); color: var(--primary-400); }
+[data-theme="dark"] .mini-stat--gold .mini-stat-icon  { background: rgba(245,158,11,0.12); color: #FCD34D; }
+[data-theme="dark"] .mini-stat--pink .mini-stat-icon  { background: rgba(244,114,182,0.12); color: var(--accent-400); }
+[data-theme="dark"] .mini-stat--blue .mini-stat-icon  { background: rgba(59,130,246,0.12); color: #93C5FD; }
+.mini-stat-value { font-size: var(--text-2xl); font-weight: 800; font-family: var(--font-heading); color: var(--text-primary); }
+.mini-stat-label { font-size: var(--text-xs); color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-top: var(--space-1); }
+
+.assignment-list { display: flex; flex-direction: column; gap: var(--space-3); }
+.assignment-card { display: flex; gap: var(--space-3); padding: var(--space-4); border-radius: var(--radius-lg); border: 1px solid var(--border-light); transition: all var(--transition-fast); cursor: pointer; }
+.assignment-card:hover { border-color: var(--primary-300); box-shadow: var(--shadow-sm); }
+[data-theme="dark"] .assignment-card { border-color: rgba(75,85,99,0.3); }
+.assignment-color { width: 4px; border-radius: var(--radius-full); flex-shrink: 0; }
+.assignment-info { flex: 1; }
+.assignment-subject { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+.assignment-title { font-size: var(--text-sm); font-weight: 500; color: var(--text-primary); margin: 4px 0; }
+.assignment-due { font-size: var(--text-xs); color: var(--text-tertiary); }
+.assignment-due--urgent { color: var(--warning); font-weight: 600; }
+
+.activity-card { background: var(--bg-tertiary); border-radius: var(--radius-lg); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); }
+[data-theme="dark"] .activity-card { background: rgba(31,41,55,0.4); }
+.activity-card-icon { width: 40px; height: 40px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; }
+.activity-card-icon--academic { background: var(--primary-50); color: var(--primary-600); }
+[data-theme="dark"] .activity-card-icon--academic { background: rgba(16,185,129,0.12); color: var(--primary-400); }
+.activity-card-icon--sports { background: #FFFBEB; color: #D97706; }
+[data-theme="dark"] .activity-card-icon--sports { background: rgba(245,158,11,0.12); color: #FCD34D; }
+.activity-card-title { font-size: var(--text-sm); font-weight: 600; color: var(--text-primary); }
+.activity-card-date { font-size: var(--text-xs); color: var(--text-tertiary); }
