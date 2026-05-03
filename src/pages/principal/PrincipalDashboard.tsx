@@ -1,4 +1,4 @@
-import { Users, GraduationCap, ClipboardCheck, CreditCard, Calendar, BookOpen, TrendingUp, Clock } from 'lucide-react';
+import { Users, GraduationCap, ClipboardCheck, CreditCard, Calendar, BookOpen, Clock } from 'lucide-react';
 import StatCard from '../../components/ui/StatCard';
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,

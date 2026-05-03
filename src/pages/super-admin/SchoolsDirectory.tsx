@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Search, SlidersHorizontal, LayoutGrid, List, Plus, MapPin,
-  Eye, MoreVertical, Phone, Mail, Users, GraduationCap,
+  Eye, MoreVertical, Users, GraduationCap,
   ChevronLeft, ChevronRight, School, X, Building2, Star
 } from 'lucide-react';
 import StatCard from '../../components/ui/StatCard';

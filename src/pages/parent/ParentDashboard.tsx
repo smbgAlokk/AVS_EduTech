@@ -1,4 +1,4 @@
-import { ClipboardCheck, CreditCard, Calendar, BookOpen, Megaphone, BarChart3 } from 'lucide-react';
+import { ClipboardCheck, CreditCard, Calendar, BookOpen, Megaphone } from 'lucide-react';
 import StatCard from '../../components/ui/StatCard';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, BarChart, Bar } from 'recharts';
 import './ParentDashboard.css';

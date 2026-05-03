@@ -1,4 +1,4 @@
-import { ClipboardCheck, PenTool, BookOpen, BarChart3, MessageSquare, Clock } from 'lucide-react';
+import { ClipboardCheck, PenTool, BarChart3, MessageSquare, Clock } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import './TeacherDashboard.css';
 

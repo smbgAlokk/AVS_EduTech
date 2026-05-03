@@ -1,4 +1,4 @@
-import { Clock, BookOpen, BarChart3, Trophy, Calendar, Activity as ActivityIcon, Target } from 'lucide-react';
+import { BookOpen, Trophy, Calendar, Target } from 'lucide-react';
 import { RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Tooltip } from 'recharts';
 import './StudentDashboard.css';
 

@@ -124,7 +124,7 @@ export default function SuperAdminDashboard() {
                     background: 'var(--bg-card)', border: '1px solid var(--border-light)',
                     borderRadius: '8px', fontSize: '13px', boxShadow: 'var(--shadow-lg)'
                   }}
-                  formatter={(value: number) => [`${value}%`, 'Attendance']}
+                  formatter={(value: any) => [`${value}%`, 'Attendance']}
                 />
                 <Bar dataKey="attendance" radius={[0, 6, 6, 0]} barSize={16}>
                   {attendanceData.map((entry, index) => (
@@ -182,7 +182,7 @@ export default function SuperAdminDashboard() {
                     background: 'var(--bg-card)', border: '1px solid var(--border-light)',
                     borderRadius: '8px', fontSize: '13px', boxShadow: 'var(--shadow-lg)'
                   }}
-                  formatter={(value: number) => [`₹${value} Cr`, 'Collection']}
+                  formatter={(value: any) => [`₹${value} Cr`, 'Collection']}
                 />
                 <Area type="monotone" dataKey="amount" stroke="#10B981" strokeWidth={2.5} fill="url(#feeGradient)" />
               </AreaChart>
@@ -215,7 +215,7 @@ export default function SuperAdminDashboard() {
                     background: 'var(--bg-card)', border: '1px solid var(--border-light)',
                     borderRadius: '8px', fontSize: '13px'
                   }}
-                  formatter={(value: number, name: string) => [value, name]}
+                  formatter={(value: any, name: any) => [value, name]}
                 />
               </PieChart>
             </ResponsiveContainer>
