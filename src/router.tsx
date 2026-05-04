@@ -9,6 +9,8 @@ import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import StudentDashboard from './pages/student/StudentDashboard';
 import ParentDashboard from './pages/parent/ParentDashboard';
 import ComingSoon from './components/ui/ComingSoon';
+import PrincipalStudents from './pages/principal/PrincipalStudents';
+
 
 const p = (title: string) => <ComingSoon title={title} />;
 
@@ -35,7 +37,7 @@ export const router = createBrowserRouter([
   // Principal
   { element: <AppShell />, children: [
     { path: '/principal', element: <PrincipalDashboard /> },
-    { path: '/principal/students', element: p('Student Management') },
+    { path: '/principal/students', element: <PrincipalStudents /> },
     { path: '/principal/students/:id', element: p('Student Profile') },
     { path: '/principal/teachers', element: p('Teacher Management') },
     { path: '/principal/attendance', element: p('Attendance Monitor') },
