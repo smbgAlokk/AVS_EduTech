@@ -3,6 +3,7 @@ import AppShell from './components/layout/AppShell';
 import Login from './pages/auth/Login';
 import SuperAdminDashboard from './pages/super-admin/SuperAdminDashboard';
 import SchoolsDirectory from './pages/super-admin/SchoolsDirectory';
+import SchoolDetails from './pages/super-admin/SchoolDetails';
 import StudentDatabase from './pages/super-admin/StudentDatabase';
 import PrincipalDashboard from './pages/principal/PrincipalDashboard';
 import TeacherDashboard from './pages/teacher/TeacherDashboard';
@@ -10,6 +11,8 @@ import StudentDashboard from './pages/student/StudentDashboard';
 import ParentDashboard from './pages/parent/ParentDashboard';
 import ComingSoon from './components/ui/ComingSoon';
 import PrincipalStudents from './pages/principal/PrincipalStudents';
+import FinancialReports from './components/shared/FinancialReports';
+import SdfFundManagement from './components/shared/SdfFundManagement';
 
 
 const p = (title: string) => <ComingSoon title={title} />;
@@ -22,11 +25,11 @@ export const router = createBrowserRouter([
   { element: <AppShell />, children: [
     { path: '/super-admin', element: <SuperAdminDashboard /> },
     { path: '/super-admin/schools', element: <SchoolsDirectory /> },
-    { path: '/super-admin/schools/:id', element: p('School Details') },
+    { path: '/super-admin/schools/:id', element: <SchoolDetails /> },
     { path: '/super-admin/students', element: <StudentDatabase /> },
-    { path: '/super-admin/finance', element: p('Financial Reports') },
+    { path: '/super-admin/finance', element: <FinancialReports role="super-admin" /> },
     { path: '/super-admin/attendance', element: p('Attendance Overview') },
-    { path: '/super-admin/sdf', element: p('SDF Fund Management') },
+    { path: '/super-admin/sdf', element: <SdfFundManagement role="super-admin" /> },
     { path: '/super-admin/development', element: p('Development Works') },
     { path: '/super-admin/initiatives', element: p('Initiatives') },
     { path: '/super-admin/competitions', element: p('Competitions') },
@@ -41,11 +44,11 @@ export const router = createBrowserRouter([
     { path: '/principal/students/:id', element: p('Student Profile') },
     { path: '/principal/teachers', element: p('Teacher Management') },
     { path: '/principal/attendance', element: p('Attendance Monitor') },
-    { path: '/principal/fees', element: p('Fee Management') },
+    { path: '/principal/fees', element: <FinancialReports role="principal" /> },
     { path: '/principal/exams', element: p('Exam Schedule') },
     { path: '/principal/allotment', element: p('Class Allotment') },
-    { path: '/principal/accounts', element: p('Accounts & Expenses') },
-    { path: '/principal/sdf', element: p('SDF Fund') },
+    { path: '/principal/accounts', element: <FinancialReports role="principal" /> },
+    { path: '/principal/sdf', element: <SdfFundManagement role="principal" /> },
     { path: '/principal/development', element: p('Development Works') },
     { path: '/principal/announcements', element: p('Announcements') },
     { path: '/principal/gallery', element: p('Photo Gallery') },

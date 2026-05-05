@@ -1,27 +1,7 @@
 import { BookOpen, Trophy, Calendar, Target } from 'lucide-react';
 import { RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Tooltip } from 'recharts';
+import { studentData } from '../../data/dashboards';
 import './StudentDashboard.css';
-
-const schedule = [
-  { time: '8:30', subject: 'Mathematics', teacher: 'Mrs. Sharma', current: false },
-  { time: '9:15', subject: 'Science', teacher: 'Mr. Verma', current: true },
-  { time: '10:15', subject: 'English', teacher: 'Ms. D\'souza', current: false },
-  { time: '11:00', subject: 'Hindi', teacher: 'Mrs. Gupta', current: false },
-  { time: '12:00', subject: 'Social Studies', teacher: 'Mr. Kapoor', current: false },
-  { time: '1:30', subject: 'Computer', teacher: 'Mr. Singh', current: false },
-];
-
-const perfData = [
-  { subject: 'Math', score: 88 }, { subject: 'Science', score: 82 },
-  { subject: 'English', score: 91 }, { subject: 'Hindi', score: 78 },
-  { subject: 'SST', score: 85 }, { subject: 'Computer', score: 92 },
-];
-
-const assignments = [
-  { subject: 'Mathematics', title: 'Exercise 5.3 — Quadratic Equations', due: 'Tomorrow', color: '#10B981', urgent: true },
-  { subject: 'English', title: 'Essay — Climate Change', due: 'In 3 days', color: '#3B82F6', urgent: false },
-  { subject: 'Science', title: 'Lab Report — Photosynthesis', due: 'In 2 days', color: '#F59E0B', urgent: false },
-];
 
 export default function StudentDashboard() {
   return (
@@ -34,7 +14,7 @@ export default function StudentDashboard() {
       <div className="glass-card" style={{ marginBottom: 'var(--space-6)' }}>
         <div className="card-header"><h3 className="card-title">Today's Schedule</h3></div>
         <div className="timetable-strip">
-          {schedule.map((s, i) => (
+          {studentData.schedule.map((s, i) => (
             <div key={i} className={`timetable-slot ${s.current ? 'timetable-slot--current' : ''}`}>
               <div className="ts-period">{s.time}</div>
               <div className="ts-subject">{s.subject}</div>
@@ -56,7 +36,7 @@ export default function StudentDashboard() {
         <div className="glass-card">
           <div className="card-header"><h3 className="card-title">Assignments</h3></div>
           <div className="assignment-list">
-            {assignments.map((a, i) => (
+            {studentData.assignments.map((a, i) => (
               <div key={i} className="assignment-card">
                 <div className="assignment-color" style={{ background: a.color }} />
                 <div className="assignment-info">
@@ -72,7 +52,7 @@ export default function StudentDashboard() {
           <div className="card-header"><h3 className="card-title">My Performance</h3></div>
           <div style={{ height: 280 }}>
             <ResponsiveContainer width="100%" height="100%">
-              <RadarChart data={perfData} cx="50%" cy="50%" outerRadius="70%">
+              <RadarChart data={studentData.performance} cx="50%" cy="50%" outerRadius="70%">
                 <PolarGrid stroke="var(--border-light)" />
                 <PolarAngleAxis dataKey="subject" tick={{ fontSize: 12, fill: 'var(--text-secondary)' }} />
                 <PolarRadiusAxis tick={{ fontSize: 10, fill: 'var(--text-tertiary)' }} domain={[0, 100]} />
