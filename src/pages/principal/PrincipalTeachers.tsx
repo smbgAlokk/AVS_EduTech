@@ -64,7 +64,7 @@ const teachersData: Teacher[] = [
   { id: 27, name: "Mohit Bansal", gender: "Male", subject: "Physical Education", classLevel: "Up to 10", qualification: "Bachelor", salary: 38000, experience: 5, attendance: 90, status: "Active" },
   { id: 28, name: "Tanvi Kapoor", gender: "Female", subject: "Arts", classLevel: "Up to 10", qualification: "Master", salary: 43000, experience: 6, attendance: 91, status: "On Leave" },
   { id: 29, name: "Abhishek Rai", gender: "Male", subject: "Mathematics", classLevel: "Up to 10", qualification: "Master", salary: 51000, experience: 6, attendance: 92, status: "Active" },
-  { id: 30, name: "Swati Mishra", gender: "Female", subject: "Science", classLevel: "Up to 10", qualification: "PhD", salary: 61000, experience: 10, attendance: 96, status: "Active" },
+  { id: 30, name: "Swati Mishra", gender: "Male", subject: "Science", classLevel: "Up to 10", qualification: "PhD", salary: 61000, experience: 10, attendance: 96, status: "Active" },
   { id: 31, name: "Gaurav Tripathi", gender: "Male", subject: "English", classLevel: "Up to 12", qualification: "Master", salary: 53000, experience: 8, attendance: 93, status: "Active" },
   { id: 32, name: "Renu Bala", gender: "Female", subject: "Hindi", classLevel: "Up to 10", qualification: "Bachelor", salary: 39000, experience: 3, attendance: 86, status: "Needs Attention" },
   { id: 33, name: "Prakash Maurya", gender: "Male", subject: "Physics", classLevel: "Up to 12", qualification: "Master", salary: 57000, experience: 7, attendance: 94, status: "Active" },
