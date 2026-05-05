@@ -1,38 +1,7 @@
 import { ClipboardCheck, PenTool, BarChart3, MessageSquare, Clock } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
+import { teacherData } from '../../data/dashboards';
 import './TeacherDashboard.css';
-
-const todayTimetable = [
-  { period: 1, time: '8:30 – 9:15', class: 'Class 10-A', subject: 'Mathematics', current: false },
-  { period: 2, time: '9:15 – 10:00', class: 'Class 9-B', subject: 'Mathematics', current: true },
-  { period: 3, time: '10:15 – 11:00', class: '', subject: 'Free Period', current: false },
-  { period: 4, time: '11:00 – 11:45', class: 'Class 10-A', subject: 'Mathematics (Lab)', current: false },
-  { period: 5, time: '12:00 – 12:45', class: 'Class 9-B', subject: 'Mathematics', current: false },
-  { period: 6, time: '1:30 – 2:15', class: 'Class 8-A', subject: 'Mathematics', current: false },
-];
-
-
-const recentSubmissions = [
-  { student: 'Aarav Patel', assignment: 'Exercise 5.3', date: 'Today', status: 'Pending' },
-  { student: 'Priya Singh', assignment: 'Exercise 5.3', date: 'Today', status: 'Graded' },
-  { student: 'Rohan Kumar', assignment: 'Weekly Test 4', date: 'Yesterday', status: 'Pending' },
-  { student: 'Meera Gupta', assignment: 'Exercise 5.2', date: 'Yesterday', status: 'Graded' },
-  { student: 'Arjun Reddy', assignment: 'Exercise 5.3', date: 'Today', status: 'Pending' },
-];
-
-const classPerformance = [
-  { name: 'A+ (90-100)', value: 8, color: '#10B981' },
-  { name: 'A (80-89)', value: 14, color: '#34D399' },
-  { name: 'B (70-79)', value: 12, color: '#F59E0B' },
-  { name: 'C (60-69)', value: 5, color: '#F472B6' },
-  { name: 'Below 60', value: 3, color: '#EF4444' },
-];
-
-const parentMessages = [
-  { from: "Rahul's Father", message: 'Wanted to discuss Rahul\'s math performance...', time: '10:30 AM', unread: true },
-  { from: "Priya's Mother", message: 'Will Priya be able to take the re-test?', time: '9:15 AM', unread: true },
-  { from: "Arjun's Father", message: 'Thank you for the feedback on the project.', time: 'Yesterday', unread: true },
-];
 
 export default function TeacherDashboard() {
   return (
@@ -78,7 +47,7 @@ export default function TeacherDashboard() {
           <h3 className="card-title"><Clock size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '8px' }} />Today's Timetable</h3>
         </div>
         <div className="timetable-strip">
-          {todayTimetable.map(slot => (
+          {teacherData.timetable.map(slot => (
             <div key={slot.period} className={`timetable-slot ${slot.current ? 'timetable-slot--current' : ''} ${!slot.class ? 'timetable-slot--free' : ''}`}>
               <div className="ts-period">Period {slot.period}</div>
               <div className="ts-time">{slot.time}</div>
@@ -107,7 +76,7 @@ export default function TeacherDashboard() {
               </tr>
             </thead>
             <tbody>
-              {recentSubmissions.map((s, i) => (
+              {teacherData.recentSubmissions.map((s, i) => (
                 <tr key={i}>
                   <td style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{s.student}</td>
                   <td>{s.assignment}</td>
@@ -131,8 +100,8 @@ export default function TeacherDashboard() {
           <div style={{ height: 200 }}>
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
-                <Pie data={classPerformance} cx="50%" cy="50%" innerRadius={55} outerRadius={85} paddingAngle={3} dataKey="value">
-                  {classPerformance.map((entry, index) => (
+                <Pie data={teacherData.classPerformance} cx="50%" cy="50%" innerRadius={55} outerRadius={85} paddingAngle={3} dataKey="value">
+                  {teacherData.classPerformance.map((entry, index) => (
                     <Cell key={index} fill={entry.color} />
                   ))}
                 </Pie>
@@ -141,7 +110,7 @@ export default function TeacherDashboard() {
             </ResponsiveContainer>
           </div>
           <div className="performance-legend">
-            {classPerformance.map(item => (
+            {teacherData.classPerformance.map(item => (
               <div key={item.name} className="perf-legend-item">
                 <div className="perf-legend-dot" style={{ background: item.color }} />
                 <span className="perf-legend-label">{item.name}</span>
@@ -159,7 +128,7 @@ export default function TeacherDashboard() {
           <span className="card-subtitle">3 unread</span>
         </div>
         <div className="messages-list">
-          {parentMessages.map((msg, i) => (
+          {teacherData.parentMessages.map((msg, i) => (
             <div key={i} className={`message-item ${msg.unread ? 'message-item--unread' : ''}`}>
               <div className="message-avatar">{msg.from[0]}</div>
               <div className="message-content">
