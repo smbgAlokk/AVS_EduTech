@@ -1,30 +1,8 @@
 import { ClipboardCheck, CreditCard, Calendar, BookOpen, Megaphone } from 'lucide-react';
 import StatCard from '../../components/ui/StatCard';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, BarChart, Bar } from 'recharts';
+import { parentData } from '../../data/dashboards';
 import './ParentDashboard.css';
-
-const perfTrend = [
-  { test: 'Unit 1', marks: 85 }, { test: 'Unit 2', marks: 78 },
-  { test: 'Mid-term', marks: 82 }, { test: 'Unit 3', marks: 88 }, { test: 'Unit 4', marks: 91 },
-];
-
-const subjectPerf = [
-  { subject: 'Math', score: 88 }, { subject: 'Science', score: 82 },
-  { subject: 'English', score: 91 }, { subject: 'Hindi', score: 78 }, { subject: 'SST', score: 85 },
-];
-
-const homework = [
-  { subject: 'Mathematics', title: 'Complete Exercise 5.3', due: 'Tomorrow', status: 'pending' },
-  { subject: 'English', title: 'Essay on Climate Change', due: 'In 3 days', status: 'pending' },
-  { subject: 'Science', title: 'Lab Report — Photosynthesis', due: 'In 2 days', status: 'pending' },
-];
-
-const notices = [
-  { title: 'Half Yearly Exam Schedule Released', time: 'Today', pinned: true },
-  { title: 'Annual Day Celebration on Dec 15', time: 'Yesterday', pinned: false },
-  { title: 'Fee payment deadline extended to May 15', time: '2 days ago', pinned: false },
-  { title: 'PTM scheduled for May 8', time: '3 days ago', pinned: false },
-];
 
 export default function ParentDashboard() {
   return (
@@ -58,7 +36,7 @@ export default function ParentDashboard() {
           <div className="card-header"><h3 className="card-title">Performance Trend</h3><span className="card-subtitle">Last 5 tests</span></div>
           <div style={{ height: 240 }}>
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={perfTrend} margin={{ left: 0, right: 10, top: 10, bottom: 0 }}>
+              <LineChart data={parentData.performanceTrend} margin={{ left: 0, right: 10, top: 10, bottom: 0 }}>
                 <defs>
                   <linearGradient id="perfGrad" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stopColor="#10B981" stopOpacity={0.2} />
@@ -78,7 +56,7 @@ export default function ParentDashboard() {
           <div className="card-header"><h3 className="card-title">Subject-wise Performance</h3></div>
           <div style={{ height: 240 }}>
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={subjectPerf} layout="vertical" margin={{ left: 10, right: 20, top: 10, bottom: 0 }}>
+              <BarChart data={parentData.subjectPerformance} layout="vertical" margin={{ left: 10, right: 20, top: 10, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border-light)" horizontal={false} />
                 <XAxis type="number" domain={[0, 100]} tick={{ fontSize: 12, fill: 'var(--text-tertiary)' }} axisLine={false} tickLine={false} />
                 <YAxis dataKey="subject" type="category" tick={{ fontSize: 12, fill: 'var(--text-secondary)' }} axisLine={false} tickLine={false} width={60} />
@@ -95,7 +73,7 @@ export default function ParentDashboard() {
         <div className="glass-card">
           <div className="card-header"><h3 className="card-title"><BookOpen size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} />Today's Homework</h3></div>
           <div className="assignment-list">
-            {homework.map((h, i) => (
+            {parentData.homework.map((h, i) => (
               <div key={i} className="assignment-card">
                 <div className="assignment-color" style={{ background: i === 0 ? '#10B981' : i === 1 ? '#3B82F6' : '#F59E0B' }} />
                 <div className="assignment-info">
@@ -110,7 +88,7 @@ export default function ParentDashboard() {
         <div className="glass-card">
           <div className="card-header"><h3 className="card-title"><Megaphone size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} />School Notices</h3></div>
           <div className="notices-list">
-            {notices.map((n, i) => (
+            {parentData.notices.map((n, i) => (
               <div key={i} className="notice-item">
                 {n.pinned && <span className="notice-pin">📌</span>}
                 <div className="notice-content">
