@@ -8,3 +8,7 @@
 export * from './schools';
 export * from './students';
 export * from './dashboards';
+export * from './development';
+export * from './attendance';
+export * from './staff-watch';
+export * from './policies';

@@ -21,6 +21,8 @@ export interface School {
   code: string;
   city: string;
   state: string;
+  district?: string;
+  constituency?: string;
   principal: string;
   totalStudents: number;
   totalTeachers: number;
