@@ -1,23 +1,33 @@
+import React, { Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import AppShell from './components/layout/AppShell';
 import Login from './pages/auth/Login';
-import SuperAdminDashboard from './pages/super-admin/SuperAdminDashboard';
-import SchoolsDirectory from './pages/super-admin/SchoolsDirectory';
-import SchoolDetails from './pages/super-admin/SchoolDetails';
-import StudentDatabase from './pages/super-admin/StudentDatabase';
-import PrincipalDashboard from './pages/principal/PrincipalDashboard';
-import TeacherDashboard from './pages/teacher/TeacherDashboard';
-import StudentDashboard from './pages/student/StudentDashboard';
-import ParentDashboard from './pages/parent/ParentDashboard';
 import ComingSoon from './components/ui/ComingSoon';
-import PrincipalStudents from './pages/principal/PrincipalStudents';
-import FinancialReports from './components/shared/FinancialReports';
-import SdfFundManagement from './components/shared/SdfFundManagement';
-import PrincipalTeachers from './pages/principal/PrincipalTeachers';
 
-
+// Lazy loaded routes and shared components
+const SuperAdminDashboard = React.lazy(() => import('./pages/super-admin/SuperAdminDashboard'));
+const SchoolsDirectory = React.lazy(() => import('./pages/super-admin/SchoolsDirectory'));
+const SchoolDetails = React.lazy(() => import('./pages/super-admin/SchoolDetails'));
+const StudentDatabase = React.lazy(() => import('./pages/super-admin/StudentDatabase'));
+const PrincipalDashboard = React.lazy(() => import('./pages/principal/PrincipalDashboard'));
+const TeacherDashboard = React.lazy(() => import('./pages/teacher/TeacherDashboard'));
+const StudentDashboard = React.lazy(() => import('./pages/student/StudentDashboard'));
+const ParentDashboard = React.lazy(() => import('./pages/parent/ParentDashboard'));
+const PrincipalStudents = React.lazy(() => import('./pages/principal/PrincipalStudents'));
+const FinancialReports = React.lazy(() => import('./components/shared/FinancialReports'));
+const SdfFundManagement = React.lazy(() => import('./components/shared/SdfFundManagement'));
+const DevelopmentWorks = React.lazy(() => import('./components/shared/DevelopmentWorks'));
+const AttendanceModule = React.lazy(() => import('./components/shared/AttendanceModule'));
+const PrincipalTeachers = React.lazy(() => import('./pages/principal/PrincipalTeachers'));
 
 const p = (title: string) => <ComingSoon title={title} />;
+
+// Helper to wrap lazy components in Suspense
+const withSuspense = (Component: React.LazyExoticComponent<any>, props: any = {}) => (
+  <Suspense fallback={<div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-tertiary)' }}>Loading...</div>}>
+    <Component {...props} />
+  </Suspense>
+);
 
 export const router = createBrowserRouter([
   { path: '/', element: <Login /> },
@@ -26,14 +36,14 @@ export const router = createBrowserRouter([
   // Super Admin
   {
     element: <AppShell />, children: [
-      { path: '/super-admin', element: <SuperAdminDashboard /> },
-      { path: '/super-admin/schools', element: <SchoolsDirectory /> },
-      { path: '/super-admin/schools/:id', element: <SchoolDetails /> },
-      { path: '/super-admin/students', element: <StudentDatabase /> },
-      { path: '/super-admin/finance', element: <FinancialReports role="super-admin" /> },
-      { path: '/super-admin/attendance', element: p('Attendance Overview') },
-      { path: '/super-admin/sdf', element: <SdfFundManagement role="super-admin" /> },
-      { path: '/super-admin/development', element: p('Development Works') },
+      { path: '/super-admin', element: withSuspense(SuperAdminDashboard) },
+      { path: '/super-admin/schools', element: withSuspense(SchoolsDirectory) },
+      { path: '/super-admin/schools/:id', element: withSuspense(SchoolDetails) },
+      { path: '/super-admin/students', element: withSuspense(StudentDatabase) },
+      { path: '/super-admin/finance', element: withSuspense(FinancialReports, { role: 'super-admin' }) },
+      { path: '/super-admin/attendance', element: withSuspense(AttendanceModule, { role: 'super-admin' }) },
+      { path: '/super-admin/sdf', element: withSuspense(SdfFundManagement, { role: 'super-admin' }) },
+      { path: '/super-admin/development', element: withSuspense(DevelopmentWorks, { role: 'super-admin' }) },
       { path: '/super-admin/initiatives', element: p('Initiatives') },
       { path: '/super-admin/competitions', element: p('Competitions') },
       { path: '/super-admin/notifications', element: p('Notifications') },
@@ -44,17 +54,17 @@ export const router = createBrowserRouter([
   // Principal
   {
     element: <AppShell />, children: [
-      { path: '/principal', element: <PrincipalDashboard /> },
-      { path: '/principal/students', element: <PrincipalStudents /> },
+      { path: '/principal', element: withSuspense(PrincipalDashboard) },
+      { path: '/principal/students', element: withSuspense(PrincipalStudents) },
       { path: '/principal/students/:id', element: p('Student Profile') },
-      { path: '/principal/teachers', element: <PrincipalTeachers /> },
-      { path: '/principal/attendance', element: p('Attendance Monitor') },
-      { path: '/principal/fees', element: <FinancialReports role="principal" /> },
+      { path: '/principal/teachers', element: withSuspense(PrincipalTeachers) },
+      { path: '/principal/attendance', element: withSuspense(AttendanceModule, { role: 'principal' }) },
+      { path: '/principal/fees', element: withSuspense(FinancialReports, { role: 'principal' }) },
       { path: '/principal/exams', element: p('Exam Schedule') },
       { path: '/principal/allotment', element: p('Class Allotment') },
-      { path: '/principal/accounts', element: <FinancialReports role="principal" /> },
-      { path: '/principal/sdf', element: <SdfFundManagement role="principal" /> },
-      { path: '/principal/development', element: p('Development Works') },
+      { path: '/principal/accounts', element: withSuspense(FinancialReports, { role: 'principal' }) },
+      { path: '/principal/sdf', element: withSuspense(SdfFundManagement, { role: 'principal' }) },
+      { path: '/principal/development', element: withSuspense(DevelopmentWorks, { role: 'principal' }) },
       { path: '/principal/announcements', element: p('Announcements') },
       { path: '/principal/gallery', element: p('Photo Gallery') },
       { path: '/principal/reports', element: p('Reports') },
@@ -64,8 +74,8 @@ export const router = createBrowserRouter([
   // Teacher
   {
     element: <AppShell />, children: [
-      { path: '/teacher', element: <TeacherDashboard /> },
-      { path: '/teacher/attendance', element: p('Mark Attendance') },
+      { path: '/teacher', element: withSuspense(TeacherDashboard) },
+      { path: '/teacher/attendance', element: withSuspense(AttendanceModule, { role: 'teacher' }) },
       { path: '/teacher/homework', element: p('Homework & Assignments') },
       { path: '/teacher/marks', element: p('Marks Entry') },
       { path: '/teacher/timetable', element: p('My Timetable') },
@@ -80,7 +90,8 @@ export const router = createBrowserRouter([
   // Student
   {
     element: <AppShell />, children: [
-      { path: '/student', element: <StudentDashboard /> },
+      { path: '/student', element: withSuspense(StudentDashboard) },
+      { path: '/student/attendance', element: withSuspense(AttendanceModule, { role: 'student' }) },
       { path: '/student/timetable', element: p('My Timetable') },
       { path: '/student/assignments', element: p('Assignments') },
       { path: '/student/results', element: p('Results & Marks') },
@@ -94,9 +105,9 @@ export const router = createBrowserRouter([
   // Parent
   {
     element: <AppShell />, children: [
-      { path: '/parent', element: <ParentDashboard /> },
+      { path: '/parent', element: withSuspense(ParentDashboard) },
       { path: '/parent/performance', element: p('Performance Report') },
-      { path: '/parent/attendance', element: p('Attendance Tracking') },
+      { path: '/parent/attendance', element: withSuspense(AttendanceModule, { role: 'parent' }) },
       { path: '/parent/fees', element: p('Fee Payment') },
       { path: '/parent/homework', element: p('Homework Monitor') },
       { path: '/parent/chat', element: p('Chat with Teacher') },
