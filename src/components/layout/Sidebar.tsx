@@ -120,6 +120,7 @@ const navConfig: Record<UserRole, { sections: { label?: string; items: NavItem[]
       {
         items: [
           { label: 'Dashboard', path: '/student', icon: 'LayoutDashboard' },
+          { label: 'My Attendance', path: '/student/attendance', icon: 'ClipboardCheck' },
           { label: 'Timetable', path: '/student/timetable', icon: 'Clock' },
           { label: 'Assignments', path: '/student/assignments', icon: 'BookOpen' },
           { label: 'Results', path: '/student/results', icon: 'BarChart3' },
