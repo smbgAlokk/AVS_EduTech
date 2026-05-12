@@ -288,7 +288,8 @@ AVS School Project/
 │   │   ├── development.ts        # Development works (projects, tenders, vendors, inspections, budget, docs)
 │   │   ├── attendance.ts         # Attendance (all roles): schools, classes, defaulters, leave, holidays, trends
 │   │   ├── staff-watch.ts        # Staff compliance: teachers/principals, disciplinary actions, period log, surprise visits
-│   │   └── policies.ts           # Editable attendance policies (18 policies × 6 categories with govt-floor governance)
+│   │   ├── policies.ts           # Editable attendance policies (18 policies × 6 categories with govt-floor governance)
+│   │   └── initiatives.ts        # Network programs (15 initiatives × 10 categories + school participations + student enrollments)
 │   ├── hooks/                    # Generic, reusable hooks
 │   │   ├── usePagination.ts
 │   │   ├── useSchoolsFilter.ts
@@ -309,7 +310,8 @@ AVS School Project/
 │   │       ├── DevelopmentWorks.tsx
 │   │       ├── AttendanceModule.tsx  # used by ALL 5 roles via `role` prop
 │   │       ├── StaffWatchPanel.tsx   # SA + Principal disciplinary "superpowers"
-│   │       └── PoliciesPanel.tsx     # SA Attendance policies + holiday calendar (full CRUD)
+│   │       ├── PoliciesPanel.tsx     # SA Attendance policies + holiday calendar (full CRUD)
+│   │       └── InitiativesModule.tsx # Network programs — used by ALL 5 roles via `role` prop
 │   └── pages/
 │       ├── auth/Login.tsx        # Role picker (no real auth yet)
 │       ├── super-admin/          # SuperAdminDashboard, SchoolsDirectory, SchoolDetails, StudentDatabase
@@ -347,7 +349,9 @@ Phase gates are the contract. Do not advance to the next phase until the current
 - [x] Principal: Financial Reports, SDF Fund (shared components reused)
 - [x] Teacher / Student / Parent: Dashboard skeletons
 - [x] Generic hooks: pagination, schools filter, students filter
-- [ ] Super Admin: Initiatives, Competitions, Notifications, Settings
+- [x] Super Admin + all roles: Initiatives module (15 govt schemes + working Launch wizard + schools matrix)
+- [x] Super Admin & Principal: Competitions module
+- [ ] Super Admin: Notifications, Settings
 - [ ] Principal: Exams, Class Allotment, Announcements, Photo Gallery, Reports, Student Profile
 - [ ] Teacher: Homework, Marks Entry, Timetable, Materials, Activities, Parent Chat, Weekly Tests, Profile
 - [ ] Student: Timetable, Assignments, Results, Materials, Activities, Chat, Profile
@@ -488,8 +492,70 @@ Productize for other state government school bodies. Do not start P4 work, even 
 - Fully responsive (1100/768/540 breakpoints): controls stack on mobile, modal form switches to single column, Holiday panel moves below policies.
 - Type-check + ESLint + production build clean.
 
+### 2026-05-13 — Initiatives module (network programs across all 5 roles)
+- **New shared module** [src/components/shared/InitiativesModule.tsx](src/components/shared/InitiativesModule.tsx) — single component, `role` prop, role-aware tabs. Routed at `/<role>/initiatives` for all 5 roles. Sidebar links added for principal, teacher, student, parent (SA already had it).
+- **Router refactor noted:** `router.tsx` now uses `React.lazy` + `Suspense` per-route — InitiativesModule is lazy-loaded, ships as its own ~64 KB / 15 KB gzipped chunk. Same pattern applied to all shared modules.
+- **Tabs per role:**
+  - **Super Admin (3 + Launch CTA):** Overview · All Initiatives · Schools Matrix
+  - **Principal (2):** Active Programs · Completed
+  - **Teacher (1):** My Class' Programs
+  - **Student (1):** My Participation (badges + active + completed)
+  - **Parent (1):** Child's Programs
+- **Data layer** at [src/data/initiatives.ts](src/data/initiatives.ts): 15 initiatives across 10 govt-relevant categories — Government Scheme (PM POSHAN, NIPUN Bharat, NISHTHA), Health & Wellness, Academic, Capacity Building, Awards (Swachh Vidyalaya Puraskar), Awareness (Beti Padhao, Anti-Bullying), Community (VVS), Infrastructure (Smart Classroom rollout), Cultural (Bohag Bihu Festival), Sports (State Sports Meet). Each has KPIs, milestones, budget, beneficiary counts, hashtags. Plus ~95 school-participation records and 6 student-enrollment records (for Aarav Patel demo).
+- **SA Overview tab:** 4 KPI tiles (Active / Beneficiaries Reached / Budget Allocated / Schools Engaged), Flagship spotlight grid (PM POSHAN, NIPUN Bharat with embedded KPI bars), 2-column row (Scheduled launches with countdown · Category breakdown bars), Recent Activity feed.
+- **All Initiatives tab:** search + category dropdown filter + status chip row, responsive card grid. Cards have a category-coloured banner with category chip + priority flag + status badge, body with code + title + description + animated progress bar + 3-stat row (schools / beneficiaries / spent) + footer (end date + govt scheme link + hashtag).
+- **Schools Matrix tab (the heatmap):** 12 schools × active/scheduled initiatives, sticky first column + sticky header. Cells colour-coded by participation status (Completed / In progress / Opted in / Invited / Opted out) with status icons. Hover scale + ring. Per-row "X/Y programs" enrollment count.
+- **Launch Initiative wizard (2 steps, fully working):**
+  - **Step 1 — Basics & Targeting:** title/description fields, 10 category visual tiles (icon + label), priority pills (with Flagship star), funding source dropdown, govt-scheme reference field (auto-shown when funding is govt), date range, budget input, 3 targeting tiles (all schools / selected schools / class-specific) — selecting "selected schools" reveals a 12-school multi-pick grid with running count.
+  - **Step 2 — Goals & Confirm:** sticky summary recap of selections, KPI builder (up to 4 — label + target + unit, add/remove rows), notify-schools toggle, "What happens when you launch" preview pane with auto-generated initiative code.
+  - Submit: pushes initiative to state, auto-creates 'invited' participation rows for all targeted schools, animates the new card in, toast confirms.
+- **Cross-role data flow:** principals see only their school's initiatives via participation join, with a contextual "Your school: [status]" badge on each card and an Update button that increments contribution by 10% (status auto-graduates from invited → in_progress → completed). Teachers see initiatives targeting their assigned classes. Students/Parents see personal enrollment grid with earned-badges row (Trophy medal cards), active progress, and completed programs (with download-certificate button).
+- **Reusable primitives:** `KpiTile`, `InitiativeCard` (with `participation` + `onActSchool` slots — same card serves SA list, Principal grid, and Teacher view), `CategoryChip`, `StatusBadge`, `PriorityFlag`, `ProgressBar`, `FlagshipCard`. Visual differentiation comes from per-category gradient banners (10 distinct colour scales).
+- Type-check + ESLint (own files) + production build clean. Production build now ships InitiativesModule as a separate chunk thanks to lazy loading.
+
+### 2026-05-11 — BharatForce-inspired UI modernization (Sidebar + Header + Layout)
+- **Sidebar complete redesign** — replaced the edge-to-edge sidebar with a **floating dark navy pill** (`#0f172a`, `border-radius: 2rem`) positioned with `0.375rem` inset from viewport edges, inspired by BharatForce's `SampleLayout.tsx` / `SampleSidebar.tsx` reference components.
+  - **Navigation typography:** All nav labels now `uppercase`, `letter-spacing: 0.05em`, `font-weight: 600`. Active items use a green brand gradient background with glow shadow + pulsing white dot indicator.
+  - **Collapse toggle:** Floating green gradient circle button at the sidebar's right edge, appears on hover with `scale(1.15)` interaction. Toggle state propagated correctly to AppShell content margins.
+  - **User profile footer:** Semi-transparent card (`rgba(255,255,255,0.04)`) with gradient avatar, uppercase name/role, green pulsing online dot, and a rotating ChevronDown indicator.
+  - **Upward-opening user dropdown menu** — clicking the user card opens an animated `slideUp` dropdown with "My Profile" (role-specific routing) and "Sign Out" actions. Features outside-click dismissal (`useRef` + `mousedown` listener), route-change auto-close, keyboard accessibility (`Enter`/`Space`), and danger-styled logout button.
+  - **Mobile close button** — `X` icon button in brand header, visible only when `mobileOpen` is true.
+- **Navigation active-state bugfix** — fixed a critical UI bug where the Dashboard base route (`/super-admin`, `/principal`, etc.) was permanently highlighted due to React Router's inclusive path matching. Applied the `end` prop on `NavLink` for base role paths + custom strict `className` render prop to guarantee exactly one active item at all times.
+- **Module header redesign** — replaced the plain `.page-header` with a BharatForce-style gradient banner:
+  - `overflow: hidden` container with subtle `linear-gradient(to bottom right)` using brand emerald tints.
+  - Two CSS pseudo-element glow circles (`::before` top-right, `::after` bottom-left) with `filter: blur(48px)` and `5%` opacity for soft ambient lighting.
+  - Dark mode override uses `rgba(15, 23, 42, 0.4)` base with minimal emerald tint.
+  - Title typography: `1.5rem`, `font-weight: 800` (extrabold), `italic`, `uppercase`, `letter-spacing: -0.05em`.
+  - Subtitle: `10px`, `bold`, `uppercase`, `letter-spacing: -0.025em`, tertiary color.
+- **Layout spacing refinements:**
+  - `--sidebar-inset` reduced from `0.5rem` → `0.375rem` to tighten the sidebar-to-content gap.
+  - `.page-container` and `.page-header` use `var(--space-6)` (24px) horizontal padding with matching negative margins for edge-to-edge bleed.
+  - New tokens added: `--radius-pill: 2rem`, `--sidebar-inset: 0.375rem`.
+- **Files modified:** `tokens.css`, `globals.css`, `Sidebar.tsx`, `Sidebar.css`, `AppShell.css`, `Header.css`.
+- **No logic regressions** — all routing, RBAC navigation, role-based filtering, and responsive behaviour verified across Super Admin, Principal, and Teacher roles in both light and dark themes.
+
+### 2026-05-11 — Pixel-Perfect Module Headers (BharatForce Alignment)
+- **Achieved exact visual parity** between the AVS project and the BharatForce "Attendance" module header aesthetic.
+- **Faux-Bold Typography Mechanics:** Resolved the font-weight rendering discrepancy. BharatForce achieves its chunky, aggressive header text because it loads the `Inter` font only up to weight `700`, forcing the browser to artificially thicken (faux-bold) `font-black` (`900`). Updated AVS's `globals.css` Google Fonts import to match this exactly, eliminating the thin "800-weight native" look.
+- **Opaque Gradient & Glow Circles:** Replaced the highly transparent header gradient with a fully opaque brand-tinted version (`linear-gradient(to bottom right, #f0fdf4, #ffffff, #ecfdf5);`) to perfectly match the depth and opacity of BharatForce's pink header, while retaining AVS's emerald branding. Glow circles are now properly positioned behind the `z-index: 10` text.
+- **Structural Standardization & `.page-wrapper`:** Removed hardcoded `.page-header` logic from individual modules (like `SuperAdminDashboard.tsx`) and fully integrated the reusable `<PageHeader />` component. Created a new `.page-wrapper` global layout utility to guarantee that every module header spans 100% edge-to-edge without being constrained by inner `.page-container` padding.
+- **Global CSS Synchronization:** Backported the precise `PageHeader.css` tokens (`font-weight: 900`, `font-style: italic`, `text-transform: uppercase`, `letter-spacing: -0.05em`) directly into `.page-header`, `.page-title`, and `.page-subtitle` in `globals.css`. This ensures that even un-refactored legacy modules instantly inherit the exact pixel-perfect UI.
+
+### 2026-05-12 — Data Authenticity & UI Cleanup
+- **Real AVS Branches:** Extracted authentic school branch names (e.g., AVS Pub Mangaldoi, AVS Bechimari, AVS Dokuchi) from `src/data/schools.ts` and replaced the generic placeholder data (AVS Delhi, AVS Lucknow) inside `superAdminData` mock data (`dashboards.ts`).
+- **Contextual Accuracy:** Updated the region text in the `SuperAdminDashboard.tsx` from "Active across India" to "Active across Assam" to strictly reflect the real-world operational domain of the Adarsha Vidyalaya Sangathan (AVS).
+- **CSS Maintenance:** Cleaned up `AttendanceModule.css` by removing empty rulesets (`.att-defaulters`) to resolve IDE warnings, maintaining a clean codebase.
+
+### 2026-05-12 — Competitions Module (Super Admin & Principal)
+- **New shared module** [src/components/shared/CompetitionsModule.tsx] — single component, `role` prop, role-aware tabs. Routed at `/<role>/competitions` for Super Admin and Principal. Sidebar link added for Principal under Infrastructure.
+- **Tabs per role:**
+  - **Super Admin (3):** Overview (KPIs, active events list) · Schools Matrix (heatmap of participation) · Approvals
+  - **Principal (3):** Events (active competitions with "Nominate Students" workflow) · Hosting (request HQ to host) · Trophy Cabinet (medals won by the school)
+- **Data layer** at [src/data/competitions.ts]: 4 mock competitions (Academic, Sports, Cultural), participation matrix covering demo schools, and school achievements (medals).
+- **UI Details:** 4 KPI Tiles (Active Events, Participants, Budget, Schools Engaged). Validation ensures Principals cannot nominate >50 students. High-fidelity School Matrix correctly plots engagement across events. Used BharatForce `PageHeader` style layout perfectly.
+
 ### Where we are right now (as of 2026-05-12)
-The prototype's "spine" is in place: routing, role-aware shell, design system, mock data layer, and the high-priority Super Admin and Principal modules are real screens. Teacher / Student / Parent dashboards exist but most of their inner pages are `ComingSoon` placeholders. The next concrete action is to keep building module-by-module to industry-standard UI quality, working through the unchecked items in Phase 0.
+The prototype's "spine" is in place: routing, role-aware shell, design system, mock data layer, and the high-priority Super Admin and Principal modules are real screens. Teacher / Student / Parent dashboards exist but most of their inner pages are `ComingSoon` placeholders. The navigation shell (sidebar + header) has been fully modernized to a premium, BharatForce-grade floating pill design with gradient headers, making the entire platform feel significantly more polished and professional for the Secretary pitch.
 
 **Next action:** pick the next-most-important unbuilt module from §8 Phase 0 and build it end-to-end with full UI polish, mock data, and responsive layout.
 

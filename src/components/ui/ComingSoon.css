@@ -6,19 +6,19 @@
   min-height: calc(100vh - var(--header-height) - var(--space-12));
   padding: var(--space-8);
   text-align: center;
-  animation: fadeIn 0.4s ease;
+  animation: fadeIn 0.25s var(--ease-out);
 }
 
 .coming-soon-icon {
-  width: 80px;
-  height: 80px;
+  width: 72px;
+  height: 72px;
   border-radius: var(--radius-2xl);
   background: linear-gradient(135deg, var(--primary-50), var(--accent-50));
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--primary-500);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-5);
 }
 
 [data-theme="dark"] .coming-soon-icon {
@@ -27,27 +27,29 @@
 
 .coming-soon-title {
   font-family: var(--font-heading);
-  font-size: var(--text-2xl);
-  font-weight: 700;
+  font-size: var(--text-xl);
+  font-weight: var(--fw-semibold);
   color: var(--text-primary);
   margin-bottom: var(--space-2);
+  letter-spacing: var(--tracking-tight);
 }
 
 .coming-soon-subtitle {
-  font-size: var(--text-base);
+  font-size: var(--text-sm);
   color: var(--text-tertiary);
-  max-width: 400px;
+  max-width: 360px;
+  line-height: var(--leading-relaxed);
 }
 
 .coming-soon-dots {
   display: flex;
   gap: var(--space-2);
-  margin-top: var(--space-6);
+  margin-top: var(--space-5);
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: var(--radius-full);
   background: var(--primary-400);
   animation: pulse 1.4s ease-in-out infinite;

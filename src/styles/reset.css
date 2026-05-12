@@ -14,16 +14,20 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   scroll-behavior: smooth;
+  tab-size: 4;
 }
 
 body {
   min-height: 100vh;
   line-height: var(--leading-normal);
   font-family: var(--font-body);
+  font-size: var(--text-base);
   color: var(--text-primary);
   background-color: var(--bg-primary);
   transition: background-color var(--transition-base), color var(--transition-base);
+  -webkit-tap-highlight-color: transparent;
 }
 
 img, picture, video, canvas, svg {
@@ -40,6 +44,7 @@ button {
   cursor: pointer;
   border: none;
   background: none;
+  -webkit-appearance: none;
 }
 
 a {
@@ -54,12 +59,21 @@ ul, ol {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   line-height: var(--leading-tight);
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   overflow-wrap: break-word;
+  letter-spacing: var(--tracking-tight);
 }
+
+h1 { font-size: var(--text-3xl); font-weight: var(--fw-bold); }
+h2 { font-size: var(--text-2xl); font-weight: var(--fw-bold); }
+h3 { font-size: var(--text-xl);  font-weight: var(--fw-semibold); }
+h4 { font-size: var(--text-lg);  font-weight: var(--fw-semibold); }
+h5 { font-size: var(--text-md);  font-weight: var(--fw-medium); }
+h6 { font-size: var(--text-base); font-weight: var(--fw-medium); }
 
 p {
   overflow-wrap: break-word;
+  line-height: var(--leading-relaxed);
 }
 
 table {
@@ -67,9 +81,21 @@ table {
   width: 100%;
 }
 
+/* Focus ring — consistent, accessible */
+:focus-visible {
+  outline: 2px solid var(--primary-400);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Scrollbar — thin, subtle */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -89,6 +115,17 @@ table {
   background: var(--grey-400);
 }
 
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--grey-300) transparent;
+}
+
+[data-theme="dark"] * {
+  scrollbar-color: var(--grey-600) transparent;
+}
+
+/* Selection */
 ::selection {
   background: var(--primary-200);
   color: var(--primary-900);
@@ -99,6 +136,14 @@ table {
   color: var(--primary-100);
 }
 
+/* Placeholder */
+::placeholder {
+  color: var(--text-tertiary);
+  opacity: 1;
+}
+
+/* Root container */
 #root {
   min-height: 100vh;
+  isolation: isolate;
 }

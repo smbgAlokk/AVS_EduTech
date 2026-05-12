@@ -23,6 +23,7 @@ import {
 } from '../../data/attendance';
 import StaffWatchPanel from './StaffWatchPanel';
 import PoliciesPanel from './PoliciesPanel';
+import PageHeader from '../ui/PageHeader';
 import './AttendanceModule.css';
 
 type Role = 'super-admin' | 'principal' | 'teacher' | 'student' | 'parent';
@@ -1424,33 +1425,14 @@ const TAB_CONFIG: Record<Role, TabDef[]> = {
   ],
 };
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   HEADER + KPI STRIP — role-aware
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-function ModuleHeader({ role }: { role: Role }) {
-  const titleMap: Record<Role, { title: string; sub: string }> = {
-    'super-admin': { title: 'Attendance — Network',    sub: `Live oversight across ${networkSnapshot.schoolsTracked} schools • ${networkSnapshot.totalStudents.toLocaleString('en-IN')} students` },
-    principal:     { title: 'Attendance Monitor',       sub: `${DEMO_SCHOOL_NAME} • Real-time school-wide attendance` },
-    teacher:       { title: 'Attendance',               sub: `${DEMO_TEACHER_NAME} • Daily roll-call & class register` },
-    student:       { title: 'My Attendance',            sub: `${DEMO_STUDENT_NAME} — Class ${DEMO_STUDENT_CLASS}-${DEMO_STUDENT_SECTION}` },
-    parent:        { title: 'Attendance',               sub: `Tracking ${DEMO_STUDENT_NAME} — Class ${DEMO_STUDENT_CLASS}-${DEMO_STUDENT_SECTION}` },
-  };
-  const { title, sub } = titleMap[role];
-
-  return (
-    <div className="page-header att-header">
-      <div>
-        <h1 className="page-title">{title}</h1>
-        <p className="page-subtitle">{sub}</p>
-      </div>
-      <div className="att-header-date">
-        <CalendarIcon size={14} />
-        {new Date('2026-05-08').toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
-      </div>
-    </div>
-  );
-}
+/* ─── Role-aware title/subtitle map ─── */
+const HEADER_COPY: Record<Role, { title: string; sub: string }> = {
+  'super-admin': { title: 'Attendance — Network',    sub: `Live oversight across ${networkSnapshot.schoolsTracked} schools • ${networkSnapshot.totalStudents.toLocaleString('en-IN')} students` },
+  principal:     { title: 'Attendance Monitor',       sub: `${DEMO_SCHOOL_NAME} • Real-time school-wide attendance` },
+  teacher:       { title: 'Attendance',               sub: `${DEMO_TEACHER_NAME} • Daily roll-call & class register` },
+  student:       { title: 'My Attendance',            sub: `${DEMO_STUDENT_NAME} — Class ${DEMO_STUDENT_CLASS}-${DEMO_STUDENT_SECTION}` },
+  parent:        { title: 'Attendance',               sub: `Tracking ${DEMO_STUDENT_NAME} — Class ${DEMO_STUDENT_CLASS}-${DEMO_STUDENT_SECTION}` },
+};
 
 function KpiStrip({ role }: { role: Role }) {
   if (role === 'super-admin') {
@@ -1510,28 +1492,39 @@ export default function AttendanceModule({ role }: Props) {
   const current = tabs.find(t => t.key === active) ?? tabs[0];
 
   return (
-    <div className="att">
-      <ModuleHeader role={role} />
-      <KpiStrip role={role} />
+    <div className="page-wrapper">
+      <PageHeader
+        title={HEADER_COPY[role].title}
+        subtitle={HEADER_COPY[role].sub}
+        rightContent={
+          <div className="att-header-date">
+            <CalendarIcon size={14} />
+            {new Date('2026-05-08').toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+          </div>
+        }
+      />
+      <div className="att">
+        <KpiStrip role={role} />
 
-      <div className="att-tabs" role="tablist">
-        {tabs.map(t => (
-          <button
-            key={t.key}
-            role="tab"
-            aria-selected={active === t.key}
-            className={`att-tab ${active === t.key ? 'active' : ''}`}
-            onClick={() => setActive(t.key)}
-          >
-            {t.icon}
-            <span>{t.label}</span>
-            {t.badge ? <span className="att-tab-badge">{t.badge}</span> : null}
-          </button>
-        ))}
-      </div>
+        <div className="att-tabs" role="tablist">
+          {tabs.map(t => (
+            <button
+              key={t.key}
+              role="tab"
+              aria-selected={active === t.key}
+              className={`att-tab ${active === t.key ? 'active' : ''}`}
+              onClick={() => setActive(t.key)}
+            >
+              {t.icon}
+              <span>{t.label}</span>
+              {t.badge ? <span className="att-tab-badge">{t.badge}</span> : null}
+            </button>
+          ))}
+        </div>
 
-      <div className="att-content" key={active}>
-        {current.render()}
+        <div className="att-content" key={active}>
+          {current.render()}
+        </div>
       </div>
     </div>
   );

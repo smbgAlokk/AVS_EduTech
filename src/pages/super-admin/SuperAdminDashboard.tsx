@@ -9,25 +9,25 @@ import './SuperAdminDashboard.css';
 
 const getBarColor = (value: number) => (value >= 85 ? '#10B981' : value >= 75 ? '#F59E0B' : '#EF4444');
 
+import PageHeader from '../../components/ui/PageHeader';
+
 export default function SuperAdminDashboard() {
   return (
-    <div className="page-container">
-      {/* Header */}
-      <div className="page-header">
-        <div className="sa-welcome">
-          <div>
-            <h1 className="page-title">Dashboard</h1>
-            <p className="page-subtitle">Welcome back, Rajesh. Here's your network overview.</p>
-          </div>
+    <div className="page-wrapper">
+      <PageHeader
+        title="Dashboard"
+        subtitle="Welcome back, Rajesh. Here's your network overview."
+        rightContent={
           <div className="sa-welcome-date">
             {new Date().toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
           </div>
-        </div>
-      </div>
+        }
+      />
+      <div className="page-container">
 
       {/* Stat Cards */}
       <div className="stats-grid" style={{ marginBottom: 'var(--space-6)' }}>
-        <StatCard title="Total Schools" value="45" subtitle="Active across India" icon={<School size={22} />} trend={{ value: 4.7, label: 'this year' }} color="primary" />
+        <StatCard title="Total Schools" value="45" subtitle="Active across Assam" icon={<School size={22} />} trend={{ value: 4.7, label: 'this year' }} color="primary" />
         <StatCard title="Total Students" value="22,547" subtitle="1,234 new admissions" icon={<GraduationCap size={22} />} trend={{ value: 5.8, label: 'vs last year' }} color="accent" />
         <StatCard title="Total Teachers" value="1,892" subtitle="98% active" icon={<Users size={22} />} trend={{ value: 2.1, label: 'vs last year' }} color="info" />
         <StatCard title="Fee Collection" value="₹4.2 Cr" subtitle="This quarter" icon={<CreditCard size={22} />} progress={{ current: 82, total: 100 }} color="success" />
@@ -202,6 +202,7 @@ export default function SuperAdminDashboard() {
             </tbody>
           </table>
         </div>
+      </div>
       </div>
     </div>
   );

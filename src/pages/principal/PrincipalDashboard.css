@@ -2,19 +2,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-5);
   flex-wrap: wrap;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
 .principal-quick-stats {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
-  padding: var(--space-3) var(--space-5);
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
   background: var(--bg-card);
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-lg);
 }
 
 [data-theme="dark"] .principal-quick-stats {
@@ -32,7 +32,7 @@
 
 .pqs-item strong {
   color: var(--text-primary);
-  font-weight: 700;
+  font-weight: var(--fw-semibold);
 }
 
 .pqs-divider {
@@ -80,8 +80,8 @@
 }
 
 .schedule-dot {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: var(--radius-full);
   flex-shrink: 0;
   position: relative;
@@ -96,7 +96,7 @@
 .schedule-event {
   font-size: var(--text-sm);
   color: var(--text-primary);
-  font-weight: 500;
+  font-weight: var(--fw-medium);
 }
 
 /* Activity Feed */
@@ -124,10 +124,10 @@
 }
 
 .activity-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: var(--radius-full);
-  margin-top: 6px;
+  margin-top: 5px;
   flex-shrink: 0;
 }
 
