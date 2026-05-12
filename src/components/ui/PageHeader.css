@@ -1,0 +1,95 @@
+/* ============================================
+   PageHeader — Shared BharatForce-style Module Header
+   Vanilla CSS only. No Tailwind.
+   ============================================ */
+
+.ph {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(to bottom right, #f0fdf4, #ffffff, #ecfdf5);
+  padding: var(--space-2) 0;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.ph-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 var(--space-10); /* px-10 (40px) matching BharatForce */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+/* ─── Dark mode override ─── */
+[data-theme="dark"] .ph {
+  background: linear-gradient(to bottom right, rgba(15, 23, 42, 0.4), var(--bg-surface), rgba(16, 185, 129, 0.02));
+}
+
+/* ─── Decorative glow circles (CSS-only, no extra DOM) ─── */
+.ph::before,
+.ph::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(48px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ph::before {
+  top: -80px;
+  right: -80px;
+  width: 384px;
+  height: 384px;
+  background-color: rgba(16, 185, 129, 0.05);
+}
+
+.ph::after {
+  bottom: -80px;
+  left: -80px;
+  width: 320px;
+  height: 320px;
+  background-color: rgba(4, 120, 87, 0.05);
+}
+
+/* ─── Content sits above glow circles ─── */
+.ph > * {
+  position: relative;
+  z-index: 10;
+}
+
+/* ─── Title typography ─── */
+.ph-title {
+  font-size: 1.5rem;          /* text-2xl */
+  font-weight: 900;           /* font-black */
+  font-style: italic;         /* italic */
+  text-transform: uppercase;  /* uppercase */
+  letter-spacing: -0.05em;    /* tracking-tighter */
+  color: #0f172a;             /* text-slate-900 */
+  font-family: var(--font-heading, inherit);
+  line-height: 1;             /* leading-none */
+  margin: 0;
+}
+
+[data-theme="dark"] .ph-title {
+  color: var(--grey-50, #f9fafb);
+}
+
+/* ─── Subtitle typography ─── */
+.ph-subtitle {
+  font-size: 10px;            /* text-[10px] */
+  font-weight: 700;           /* font-bold */
+  text-transform: uppercase;  /* uppercase */
+  letter-spacing: -0.025em;   /* tracking-tight */
+  color: #94a3b8;             /* text-slate-400 */
+  margin-top: 0.25rem;        /* mt-1 */
+  margin-bottom: 0;
+}
+
+/* ─── Right content slot (date pills, action buttons, etc.) ─── */
+.ph-right {
+  flex-shrink: 0;
+}

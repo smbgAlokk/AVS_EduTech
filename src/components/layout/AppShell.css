@@ -1,5 +1,6 @@
 /* ============================================
    AppShell — AVS EduConnect
+   Floating sidebar layout
    ============================================ */
 
 .app-shell {
@@ -7,7 +8,7 @@
 }
 
 .app-content {
-  margin-left: var(--sidebar-width);
+  margin-left: calc(var(--sidebar-width) + var(--sidebar-inset) * 2);
   margin-top: var(--header-height);
   min-height: calc(100vh - var(--header-height));
   background: var(--bg-primary);
@@ -16,7 +17,7 @@
 }
 
 .sidebar-collapsed .app-content {
-  margin-left: var(--sidebar-collapsed);
+  margin-left: calc(var(--sidebar-collapsed) + var(--sidebar-inset) * 2);
 }
 
 @media (max-width: 768px) {
