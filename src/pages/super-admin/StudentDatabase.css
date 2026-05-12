@@ -6,27 +6,27 @@
 /* --- School Selector Grid --- */
 .stdb-school-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: var(--space-4);
-  margin-bottom: var(--space-6);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
 }
 
 .stdb-school-item {
   background: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-xl);
-  padding: var(--space-5);
+  padding: var(--space-4);
   cursor: pointer;
   transition: all var(--transition-fast);
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
 .stdb-school-item:hover {
   border-color: var(--primary-300);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-1px);
 }
 
 .stdb-school-item.active {
@@ -40,14 +40,14 @@
 }
 
 .stdb-school-avatar {
-  width: 46px;
-  height: 46px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
+  font-size: var(--text-xs);
   color: white;
   flex-shrink: 0;
 }
@@ -61,7 +61,7 @@
 .stdb-school-info { flex: 1; min-width: 0; }
 
 .stdb-school-name {
-  font-weight: 600;
+  font-weight: var(--fw-medium);
   font-size: var(--text-sm);
   color: var(--text-primary);
   white-space: nowrap;
@@ -79,8 +79,8 @@
 }
 
 .stdb-school-count {
-  font-size: var(--text-lg);
-  font-weight: 700;
+  font-size: var(--text-md);
+  font-weight: var(--fw-bold);
   color: var(--text-primary);
   flex-shrink: 0;
   text-align: right;
@@ -97,13 +97,13 @@
 .stdb-context-bar {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  margin-bottom: var(--space-5);
-  padding: var(--space-4) var(--space-5);
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  padding: var(--space-3) var(--space-4);
   background: var(--primary-50);
   border: 1px solid var(--primary-200);
   border-radius: var(--radius-lg);
-  animation: fadeIn 0.2s ease;
+  animation: fadeIn 0.15s var(--ease-out);
 }
 
 [data-theme="dark"] .stdb-context-bar {
@@ -112,7 +112,7 @@
 }
 
 .stdb-context-name {
-  font-weight: 600;
+  font-weight: var(--fw-medium);
   color: var(--primary-700);
   font-size: var(--text-sm);
   flex: 1;
@@ -124,13 +124,13 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 5px 12px;
+  padding: 4px 10px;
   border: 1px solid var(--primary-300);
   border-radius: var(--radius-md);
   background: white;
   color: var(--primary-600);
   font-size: var(--text-xs);
-  font-weight: 600;
+  font-weight: var(--fw-medium);
   cursor: pointer;
   transition: all var(--transition-fast);
 }
@@ -148,8 +148,8 @@
 /* --- Global Search Bar --- */
 .stdb-global-search {
   position: relative;
-  max-width: 480px;
-  margin-bottom: var(--space-6);
+  max-width: 420px;
+  margin-bottom: var(--space-5);
 }
 
 .stdb-global-search-icon {
@@ -163,21 +163,22 @@
 
 .stdb-global-search input {
   width: 100%;
-  padding: 12px 16px 12px 42px;
+  padding: 8px 14px 8px 36px;
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-lg);
   background: var(--bg-card);
   font-size: var(--text-sm);
   color: var(--text-primary);
   transition: all var(--transition-fast);
   font-family: var(--font-body);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-xs);
+  height: 38px;
 }
 
 .stdb-global-search input:focus {
   outline: none;
   border-color: var(--primary-500);
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12), var(--shadow-md);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.08), var(--shadow-sm);
 }
 
 .stdb-global-search input::placeholder { color: var(--text-tertiary); }
@@ -209,7 +210,7 @@
 
 .stdb-search input {
   width: 100%;
-  padding: 10px 14px 10px 38px;
+  padding: 7px 12px 7px 34px;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   background: var(--bg-input);
@@ -217,6 +218,7 @@
   color: var(--text-primary);
   transition: all var(--transition-fast);
   font-family: var(--font-body);
+  height: 36px;
 }
 
 .stdb-search input:focus {
@@ -231,7 +233,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: 9px 16px;
+  padding: 7px 14px;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   background: var(--bg-input);
@@ -286,23 +288,24 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: 9px 18px;
+  padding: 7px 16px;
   border: none;
   border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  background: var(--primary-500);
   color: white;
   font-size: var(--text-sm);
-  font-weight: 600;
+  font-weight: var(--fw-medium);
   cursor: pointer;
   transition: all var(--transition-fast);
   font-family: var(--font-body);
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
   white-space: nowrap;
+  height: 36px;
 }
 
 .stdb-add-btn:hover {
+  background: var(--primary-600);
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
 }
 
 /* --- Filter Bar --- */
@@ -434,7 +437,7 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--text-tertiary);
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-2) var(--space-3);
   border-bottom: 1px solid var(--border-light);
   background: var(--bg-tertiary);
   position: sticky;
@@ -446,7 +449,7 @@
 [data-theme="dark"] .stdb-table th { background: rgba(31, 41, 55, 0.95); border-color: rgba(75, 85, 99, 0.3); }
 
 .stdb-table td {
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-2) var(--space-3);
   font-size: var(--text-sm);
   color: var(--text-secondary);
   border-bottom: 1px solid var(--border-light);
@@ -464,7 +467,7 @@
 .stdb-student-cell { display: flex; align-items: center; gap: var(--space-3); }
 
 .stdb-student-avatar {
-  width: 36px; height: 36px; border-radius: var(--radius-full);
+  width: 32px; height: 32px; border-radius: var(--radius-full);
   display: flex; align-items: center; justify-content: center;
   font-weight: 700; font-size: var(--text-xs); color: white; flex-shrink: 0;
 }
@@ -574,7 +577,7 @@
 .stdb-modal-profile { display: flex; align-items: center; gap: var(--space-4); }
 
 .stdb-modal-avatar {
-  width: 56px; height: 56px; border-radius: var(--radius-full);
+  width: 48px; height: 48px; border-radius: var(--radius-full);
   display: flex; align-items: center; justify-content: center;
   font-weight: 800; font-size: var(--text-xl); color: white;
   background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
@@ -628,9 +631,9 @@
 .stdb-pagination-btns { display: flex; gap: var(--space-1); }
 
 .stdb-page-btn {
-  width: 34px; height: 34px; border: 1px solid var(--border-light);
+  width: 32px; height: 32px; border: 1px solid var(--border-light);
   border-radius: var(--radius-md); background: var(--bg-input);
-  color: var(--text-secondary); font-size: var(--text-sm); font-weight: 500;
+  color: var(--text-secondary); font-size: var(--text-sm); font-weight: var(--fw-medium);
   cursor: pointer; display: flex; align-items: center; justify-content: center;
   transition: all var(--transition-fast); font-family: var(--font-body);
 }

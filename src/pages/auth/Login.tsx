@@ -4,17 +4,17 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
 import {
   Crown, Building2, BookOpen, GraduationCap, Users,
-  Eye, EyeOff, Sun, Moon, ArrowRight, School
+  Eye, EyeOff, Sun, Moon, ArrowRight, School, Mail, Lock, CheckCircle2, Shield
 } from 'lucide-react';
 import type { UserRole } from '../../types';
 import './Login.css';
 
 const roles: { role: UserRole; label: string; desc: string; icon: React.ElementType; color: string }[] = [
-  { role: 'super-admin', label: 'Super Admin', desc: 'Head Office Control Center', icon: Crown, color: 'var(--primary-500)' },
-  { role: 'principal', label: 'Principal', desc: 'School Management Hub', icon: Building2, color: 'var(--accent-500)' },
+  { role: 'super-admin', label: 'Super Admin', desc: 'HQ Control Center', icon: Crown, color: 'var(--primary-500)' },
+  { role: 'principal', label: 'Principal', desc: 'School Management', icon: Building2, color: 'var(--accent-500)' },
   { role: 'teacher', label: 'Teacher', desc: 'Classroom Operations', icon: BookOpen, color: '#3B82F6' },
   { role: 'student', label: 'Student', desc: 'My Learning Space', icon: GraduationCap, color: '#F59E0B' },
-  { role: 'parent', label: 'Parent', desc: "My Child's Progress", icon: Users, color: '#8B5CF6' },
+  { role: 'parent', label: 'Parent', desc: "Child's Progress", icon: Users, color: '#8B5CF6' },
 ];
 
 const rolePaths: Record<UserRole, string> = {
@@ -46,96 +46,93 @@ export default function Login() {
 
       {/* Left Panel — Hero */}
       <div className="login-hero">
-        <div className="login-hero-bg" />
+        <div className="login-hero-bg">
+          <div className="mesh-gradient-1"></div>
+          <div className="mesh-gradient-2"></div>
+        </div>
+        
         <div className="login-hero-content">
           <div className="login-hero-badge">
             <School size={14} />
-            <span>Trusted by 45+ Schools</span>
+            <span>Trusted by 45+ Institutions</span>
           </div>
+          
           <h1 className="login-hero-title">
-            Empowering Education,
+            The Operating System for
             <br />
-            <span className="gradient-text">One Platform.</span>
+            <span className="gradient-text">Modern Education.</span>
           </h1>
+          
           <p className="login-hero-subtitle">
-            End-to-end school management for franchises.
-            From attendance to analytics, all under one roof.
+            An enterprise-grade platform unifying administration, academics, and communication across your entire school network.
           </p>
 
-          <div className="login-hero-stats">
-            <div className="login-hero-stat">
-              <span className="login-hero-stat-value">45+</span>
-              <span className="login-hero-stat-label">Schools</span>
+          <div className="login-hero-glass-card">
+            <div className="glass-stats-grid">
+              <div className="glass-stat">
+                <div className="glass-stat-value">45+</div>
+                <div className="glass-stat-label">Campuses</div>
+              </div>
+              <div className="glass-stat-divider" />
+              <div className="glass-stat">
+                <div className="glass-stat-value">22k+</div>
+                <div className="glass-stat-label">Active Users</div>
+              </div>
+              <div className="glass-stat-divider" />
+              <div className="glass-stat">
+                <div className="glass-stat-value">99.9%</div>
+                <div className="glass-stat-label">Uptime SLA</div>
+              </div>
             </div>
-            <div className="login-hero-stat-divider" />
-            <div className="login-hero-stat">
-              <span className="login-hero-stat-value">22,500+</span>
-              <span className="login-hero-stat-label">Users</span>
+            
+            <div className="glass-features-list">
+              <div className="glass-feature"><CheckCircle2 size={16} className="feature-icon" /> Multi-Tenant Architecture</div>
+              <div className="glass-feature"><Shield size={16} className="feature-icon" /> DPDPA 2023 Compliant</div>
+              <div className="glass-feature"><CheckCircle2 size={16} className="feature-icon" /> Role-Based Access Control</div>
+              <div className="glass-feature"><CheckCircle2 size={16} className="feature-icon" /> Real-time Analytics Engine</div>
             </div>
-            <div className="login-hero-stat-divider" />
-            <div className="login-hero-stat">
-              <span className="login-hero-stat-value">5</span>
-              <span className="login-hero-stat-label">Roles</span>
-            </div>
-            <div className="login-hero-stat-divider" />
-            <div className="login-hero-stat">
-              <span className="login-hero-stat-value">99.9%</span>
-              <span className="login-hero-stat-label">Uptime</span>
-            </div>
-          </div>
-
-          <div className="login-hero-features">
-            <div className="login-hero-feature">✓ Multi-Tenant Architecture</div>
-            <div className="login-hero-feature">✓ DPDPA 2023 Compliant</div>
-            <div className="login-hero-feature">✓ Real-time Analytics</div>
-            <div className="login-hero-feature">✓ Razorpay Integration</div>
           </div>
         </div>
-
-        {/* Floating Decorative Elements */}
-        <div className="login-hero-orb login-hero-orb--1" />
-        <div className="login-hero-orb login-hero-orb--2" />
-        <div className="login-hero-orb login-hero-orb--3" />
       </div>
 
       {/* Right Panel — Login Form */}
       <div className="login-form-panel">
         <div className="login-form-container">
-          {/* Logo */}
-          <div className="login-logo">
+          
+          <div className="login-header-group">
             <div className="login-logo-icon">AE</div>
             <div>
-              <div className="login-logo-name">AVS EduConnect</div>
-              <div className="login-logo-tagline">School Management Platform</div>
+              <h2 className="login-welcome-title">Welcome back</h2>
+              <p className="login-welcome-desc">Enter your credentials to access your workspace</p>
             </div>
           </div>
 
-          {/* Form */}
           <div className="login-form">
-            <h2 className="login-form-title">Welcome back</h2>
-            <p className="login-form-desc">Sign in to your account to continue</p>
-
             <div className="login-field">
-              <label className="login-label">Email</label>
-              <input
-                type="email"
-                className="login-input"
-                placeholder="admin@avseduconnect.com"
-                defaultValue="admin@avseduconnect.com"
-              />
+              <label className="login-label">Work Email</label>
+              <div className="login-input-wrapper">
+                <div className="login-input-icon"><Mail size={18} /></div>
+                <input
+                  type="email"
+                  className="login-input has-icon"
+                  placeholder="name@school.edu.in"
+                  defaultValue="admin@avseduconnect.com"
+                />
+              </div>
             </div>
 
             <div className="login-field">
               <label className="login-label">Password</label>
               <div className="login-input-wrapper">
+                <div className="login-input-icon"><Lock size={18} /></div>
                 <input
                   type={showPassword ? 'text' : 'password'}
-                  className="login-input"
+                  className="login-input has-icon"
                   placeholder="••••••••"
                   defaultValue="password123"
                 />
-                <button className="login-input-toggle" onClick={() => setShowPassword(!showPassword)}>
-                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                <button className="login-input-toggle" onClick={() => setShowPassword(!showPassword)} aria-label="Toggle password visibility">
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
             </div>
@@ -143,24 +140,23 @@ export default function Login() {
             <div className="login-options">
               <label className="login-checkbox">
                 <input type="checkbox" defaultChecked />
-                <span>Remember me</span>
+                <span className="checkbox-custom"></span>
+                <span className="checkbox-label">Keep me signed in</span>
               </label>
               <a href="#" className="login-forgot">Forgot password?</a>
             </div>
 
             <button className="login-submit" onClick={() => handleRoleLogin('super-admin')}>
-              Sign In
-              <ArrowRight size={16} />
+              <span>Sign In to Workspace</span>
+              <ArrowRight size={18} className="submit-arrow" />
             </button>
           </div>
 
-          {/* Divider */}
           <div className="login-divider">
-            <span>Quick Demo Access</span>
+            <span>Or securely demo as</span>
           </div>
 
-          {/* Role Cards */}
-          <div className="login-roles">
+          <div className="login-roles-grid">
             {roles.map(({ role, label, desc, icon: Icon, color }) => (
               <button
                 key={role}
@@ -171,15 +167,21 @@ export default function Login() {
                 style={{ '--role-color': color } as React.CSSProperties}
               >
                 <div className="login-role-icon">
-                  <Icon size={18} />
+                  <Icon size={20} />
                 </div>
                 <div className="login-role-info">
                   <span className="login-role-name">{label}</span>
                   <span className="login-role-desc">{desc}</span>
                 </div>
-                <ArrowRight size={14} className="login-role-arrow" />
+                <div className="login-role-hover-arrow">
+                   <ArrowRight size={16} />
+                </div>
               </button>
             ))}
+          </div>
+          
+          <div className="login-footer">
+             &copy; {new Date().getFullYear()} AVS EduConnect. All rights reserved.
           </div>
         </div>
       </div>

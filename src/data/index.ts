@@ -12,3 +12,4 @@ export * from './development';
 export * from './attendance';
 export * from './staff-watch';
 export * from './policies';
+export * from './initiatives';

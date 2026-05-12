@@ -1,11 +1,11 @@
-.child-card { display: flex; align-items: center; gap: var(--space-5); padding: var(--space-6); background: linear-gradient(135deg, var(--primary-500), var(--primary-700)); border-radius: var(--radius-xl); margin-bottom: var(--space-6); color: white; flex-wrap: wrap; }
-.child-card-avatar { width: 60px; height: 60px; border-radius: var(--radius-full); background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: var(--text-xl); font-family: var(--font-heading); flex-shrink: 0; border: 2px solid rgba(255,255,255,0.3); }
+.child-card { display: flex; align-items: center; gap: var(--space-4); padding: var(--space-5); background: linear-gradient(135deg, var(--primary-500), var(--primary-700)); border-radius: var(--radius-xl); margin-bottom: var(--space-5); color: white; flex-wrap: wrap; }
+.child-card-avatar { width: 52px; height: 52px; border-radius: var(--radius-full); background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; font-weight: var(--fw-bold); font-size: var(--text-lg); font-family: var(--font-heading); flex-shrink: 0; border: 2px solid rgba(255,255,255,0.3); }
 .child-card-info { flex: 1; }
-.child-card-name { font-size: var(--text-xl); font-weight: 700; font-family: var(--font-heading); }
+.child-card-name { font-size: var(--text-lg); font-weight: var(--fw-semibold); font-family: var(--font-heading); }
 .child-card-meta { font-size: var(--text-sm); opacity: 0.8; margin-top: 2px; }
-.child-card-stats { display: flex; align-items: center; gap: var(--space-6); }
+.child-card-stats { display: flex; align-items: center; gap: var(--space-5); }
 .child-stat { text-align: center; }
-.child-stat-value { display: block; font-size: var(--text-xl); font-weight: 800; font-family: var(--font-heading); }
+.child-stat-value { display: block; font-size: var(--text-lg); font-weight: var(--fw-bold); font-family: var(--font-heading); }
 .child-stat-label { font-size: var(--text-xs); opacity: 0.7; text-transform: uppercase; letter-spacing: 0.05em; }
 .child-stat-divider { width: 1px; height: 36px; background: rgba(255,255,255,0.25); }
 

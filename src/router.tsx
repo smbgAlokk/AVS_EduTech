@@ -18,6 +18,8 @@ const FinancialReports = React.lazy(() => import('./components/shared/FinancialR
 const SdfFundManagement = React.lazy(() => import('./components/shared/SdfFundManagement'));
 const DevelopmentWorks = React.lazy(() => import('./components/shared/DevelopmentWorks'));
 const AttendanceModule = React.lazy(() => import('./components/shared/AttendanceModule'));
+const InitiativesModule = React.lazy(() => import('./components/shared/InitiativesModule'));
+const CompetitionsModule = React.lazy(() => import('./components/shared/CompetitionsModule'));
 const PrincipalTeachers = React.lazy(() => import('./pages/principal/PrincipalTeachers'));
 
 const p = (title: string) => <ComingSoon title={title} />;
@@ -44,8 +46,8 @@ export const router = createBrowserRouter([
       { path: '/super-admin/attendance', element: withSuspense(AttendanceModule, { role: 'super-admin' }) },
       { path: '/super-admin/sdf', element: withSuspense(SdfFundManagement, { role: 'super-admin' }) },
       { path: '/super-admin/development', element: withSuspense(DevelopmentWorks, { role: 'super-admin' }) },
-      { path: '/super-admin/initiatives', element: p('Initiatives') },
-      { path: '/super-admin/competitions', element: p('Competitions') },
+      { path: '/super-admin/initiatives', element: withSuspense(InitiativesModule, { role: 'super-admin' }) },
+      { path: '/super-admin/competitions', element: withSuspense(CompetitionsModule, { role: 'super-admin' }) },
       { path: '/super-admin/notifications', element: p('Notifications') },
       { path: '/super-admin/settings', element: p('Settings') },
     ]
@@ -65,6 +67,8 @@ export const router = createBrowserRouter([
       { path: '/principal/accounts', element: withSuspense(FinancialReports, { role: 'principal' }) },
       { path: '/principal/sdf', element: withSuspense(SdfFundManagement, { role: 'principal' }) },
       { path: '/principal/development', element: withSuspense(DevelopmentWorks, { role: 'principal' }) },
+      { path: '/principal/initiatives', element: withSuspense(InitiativesModule, { role: 'principal' }) },
+      { path: '/principal/competitions', element: withSuspense(CompetitionsModule, { role: 'principal' }) },
       { path: '/principal/announcements', element: p('Announcements') },
       { path: '/principal/gallery', element: p('Photo Gallery') },
       { path: '/principal/reports', element: p('Reports') },
@@ -76,6 +80,8 @@ export const router = createBrowserRouter([
     element: <AppShell />, children: [
       { path: '/teacher', element: withSuspense(TeacherDashboard) },
       { path: '/teacher/attendance', element: withSuspense(AttendanceModule, { role: 'teacher' }) },
+      { path: '/teacher/initiatives', element: withSuspense(InitiativesModule, { role: 'teacher' }) },
+      { path: '/teacher/competitions', element: withSuspense(CompetitionsModule, { role: 'teacher' }) },
       { path: '/teacher/homework', element: p('Homework & Assignments') },
       { path: '/teacher/marks', element: p('Marks Entry') },
       { path: '/teacher/timetable', element: p('My Timetable') },
@@ -92,6 +98,8 @@ export const router = createBrowserRouter([
     element: <AppShell />, children: [
       { path: '/student', element: withSuspense(StudentDashboard) },
       { path: '/student/attendance', element: withSuspense(AttendanceModule, { role: 'student' }) },
+      { path: '/student/initiatives', element: withSuspense(InitiativesModule, { role: 'student' }) },
+      { path: '/student/competitions', element: withSuspense(CompetitionsModule, { role: 'student' }) },
       { path: '/student/timetable', element: p('My Timetable') },
       { path: '/student/assignments', element: p('Assignments') },
       { path: '/student/results', element: p('Results & Marks') },
@@ -108,6 +116,8 @@ export const router = createBrowserRouter([
       { path: '/parent', element: withSuspense(ParentDashboard) },
       { path: '/parent/performance', element: p('Performance Report') },
       { path: '/parent/attendance', element: withSuspense(AttendanceModule, { role: 'parent' }) },
+      { path: '/parent/initiatives', element: withSuspense(InitiativesModule, { role: 'parent' }) },
+      { path: '/parent/competitions', element: withSuspense(CompetitionsModule, { role: 'parent' }) },
       { path: '/parent/fees', element: p('Fee Payment') },
       { path: '/parent/homework', element: p('Homework Monitor') },
       { path: '/parent/chat', element: p('Chat with Teacher') },
